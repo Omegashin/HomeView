@@ -1,0 +1,19 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/overshoot_interpolator">
+    <scale
+        android:duration="420"
+        android:fromXScale="0.0"
+        android:fromYScale="0.0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="320"
+        android:toXScale="1.0"
+        android:toYScale="1.0" />
+    <rotate
+        android:duration="420"
+        android:fromDegrees="45"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="320"
+        android:toDegrees="0" />
+</set>

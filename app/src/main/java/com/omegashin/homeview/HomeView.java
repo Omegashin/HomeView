@@ -8,7 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class HomeView extends AppCompatActivity {
+
+    public static String LOGTAG="HOME VIEW LOG: ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
