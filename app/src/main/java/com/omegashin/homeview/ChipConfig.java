@@ -27,7 +27,7 @@ import static java.security.AccessController.getContext;
 public class ChipConfig extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
-    int cursor_index=1;
+    int cursor_index = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +51,28 @@ public class ChipConfig extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 for (int i = 1; i <= 5; i++) {
-                    if (sharedPreferences.getString("reminder_" + 1, "").equals("")) {
+                    if (!sharedPreferences.getString("reminder_" + i, "").equals("")) {
                         cursor_index++;
                     }
+                }
+                //reminderName.setText(String.valueOf(cursor_index));
+
+                if (sharedPreferences.getString("reminder_"+(cursor_index), "").equals("")) {
+
+                    editor.putString("reminder_" + (cursor_index), reminderName.getText().toString());
+                    editor.putInt("cursorIndex", cursor_index);
+                    editor.apply();
+
+                    Log.e(HomeView.LOGTAG, "onClick: " + cursor_index);
+
+                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+
+                    sendBroadcast(intent);
 
                 }
-                editor.putString("reminder_"+cursor_index, reminderName.getText().toString());
-                editor.putInt("cursorIndex", cursor_index);
-                editor.apply();
-
-                Log.e(HomeView.LOGTAG, "onClick: "+cursor_index );
-
-                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-
-                sendBroadcast(intent);
+                else {
+                    Log.e(HomeView.LOGTAG, "NOOOO");
+                }
 
                 finish();
 
