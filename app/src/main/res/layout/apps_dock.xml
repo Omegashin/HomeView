@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="4dp">
+
+    <ImageView
+        android:id="@+id/app_calender"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_event_note_black_24dp" />
+
+    <ImageView
+        android:id="@+id/app_maps"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_place_black_24dp" />
+
+    <ImageView
+        android:id="@+id/app_music"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_music_note_black_24dp" />
+
+    <ImageView
+        android:id="@+id/app_store"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_play_circle_filled_black_24dp" />
+
+    <ImageView
+        android:id="@+id/app_calc"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_format_list_numbered_black_24dp" />
+
+    <ImageView
+        android:id="@+id/app_gallery"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_photo_library_black_24dp" />
+
+    <ImageView
+        android:id="@+id/app_gmail"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_mail_black_24dp" />
+
+
+    <ImageButton
+        android:id="@+id/search"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:background="#00000000"
+        android:clickable="true"
+        android:padding="2dp"
+        android:scaleType="centerInside"
+        android:src="@mipmap/google_g"
+        android:tint="@color/black" />
+
+</LinearLayout>

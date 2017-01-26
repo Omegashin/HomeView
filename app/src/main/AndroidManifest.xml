@@ -39,10 +39,16 @@
             android:windowSoftInputMode="stateVisible">
 
         </activity>
-        <activity android:name=".ChipConfig">
+        <activity
+            android:name=".ChipConfig"
+            android:windowSoftInputMode="stateVisible">
 
         </activity>
-
+        <activity android:name=".HomeViewConfig">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

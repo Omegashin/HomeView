@@ -1,8 +1,9 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialLayout="@layout/home_view_interface"
-    android:minHeight="192dp"
+    android:minHeight="128dp"
     android:minWidth="320dp"
     android:previewImage="@drawable/ic_android_black_24dp"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0"
+    android:configure="com.omegashin.homeview.HomeViewConfig"
     android:widgetCategory="home_screen" />
