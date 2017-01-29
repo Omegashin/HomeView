@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,21 +37,40 @@ public class ChipConfig extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     GridView reminderIconsGrid;
-    int[] reminderIconGridData;
     ReminderIconGridAdapter reminderIconGridAdapter;
     int IconSelectPosition = -1;
 
     int[] imageId = {
-            R.drawable.ic_android_black_24dp,
-            R.drawable.ic_play_circle_filled_black_24dp,
+            R.drawable.ic_person_black_24dp,
+            R.drawable.ic_phone_black_24dp,
+            R.drawable.ic_delete_black_24dp,
+            R.drawable.ic_assignment_black_24dp,
+            R.drawable.ic_explore_black_24dp,
+            R.drawable.ic_get_app_black_24dp,
+            R.drawable.ic_lightbulb_outline_black_24dp,
+            R.drawable.ic_markunread_mailbox_black_24dp,
+            R.drawable.ic_print_black_24dp,
+            R.drawable.ic_question_answer_black_24dp,
+            R.drawable.ic_shopping_basket_black_24dp,
+            R.drawable.ic_shopping_cart_black_24dp,
             R.drawable.ic_music_note_black_24dp,
-            R.drawable.ic_clear_black_24dp,
-            R.drawable.ic_settings_black_24dp,
+            R.drawable.ic_new_releases_black_24dp,
             R.drawable.ic_mail_black_24dp,
+            R.drawable.ic_dialpad_black_24dp,
             R.drawable.ic_place_black_24dp,
-            R.drawable.ic_format_list_numbered_black_24dp,
-            R.drawable.ic_event_note_black_24dp,
-            R.drawable.ic_photo_library_black_24dp,
+            R.drawable.ic_photo_black_24dp,
+            R.drawable.ic_headset_black_24dp,
+            R.drawable.ic_games_black_24dp,
+            R.drawable.ic_laptop_mac_black_24dp,
+            R.drawable.ic_tv_black_24dp,
+            R.drawable.ic_picture_as_pdf_black_24dp,
+            R.drawable.ic_local_dining_black_24dp,
+            R.drawable.ic_local_laundry_service_black_24dp,
+            R.drawable.ic_book_black_24dp,
+            R.drawable.ic_local_movies_black_24dp,
+            R.drawable.ic_group_black_24dp,
+            R.drawable.ic_share_black_24dp,
+            R.drawable.ic_home_black_24dp
     };
 
 
@@ -61,7 +81,7 @@ public class ChipConfig extends AppCompatActivity {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        final Button add = (Button) findViewById(R.id.add_button);
+        final FloatingActionButton add = (FloatingActionButton) findViewById(R.id.add_button);
         final EditText reminderName = (EditText) findViewById(R.id.reminder_name);
 
         reminderName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -139,8 +159,6 @@ public class ChipConfig extends AppCompatActivity {
         });
 
         reminderIconsGrid = (GridView) findViewById(R.id.reminder_icon_grid);
-
-        reminderIconGridData = getResources().getIntArray(R.array.reminder_icon_drawables);
         reminderIconGridAdapter = new ReminderIconGridAdapter(this, imageId);
 
         reminderIconsGrid.setAdapter(reminderIconGridAdapter);

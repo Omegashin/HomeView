@@ -1,71 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="4dp">
-
-    <ImageView
-        android:id="@+id/app_calender"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_weight="1"
-        android:src="@drawable/ic_event_note_black_24dp" />
+    android:layout_height="56dp"
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/app_maps"
         android:layout_width="0dp"
-        android:layout_height="32dp"
+        android:layout_height="match_parent"
+        android:padding="12dp"
         android:layout_weight="1"
-        android:src="@drawable/ic_place_black_24dp" />
+        android:foreground="@drawable/ripple"
+        android:src="@drawable/ic_place_black_24dp"
+        android:tint="@color/widgetAccent" />
 
     <ImageView
-        android:id="@+id/app_music"
+        android:id="@+id/app_calender"
         android:layout_width="0dp"
+        android:visibility="gone"
         android:layout_height="32dp"
+        android:foreground="@drawable/ripple"
         android:layout_weight="1"
-        android:src="@drawable/ic_music_note_black_24dp" />
+        android:src="@drawable/ic_today_black_24dp"
+        android:tint="@color/widgetAccent" />
 
     <ImageView
         android:id="@+id/app_store"
         android:layout_width="0dp"
-        android:layout_height="32dp"
+        android:layout_height="match_parent"
+        android:padding="12dp"
         android:layout_weight="1"
-        android:src="@drawable/ic_play_circle_filled_black_24dp" />
-
-    <ImageView
-        android:id="@+id/app_calc"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_weight="1"
-        android:src="@drawable/ic_format_list_numbered_black_24dp" />
-
-    <ImageView
-        android:id="@+id/app_gallery"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_weight="1"
-        android:src="@drawable/ic_photo_library_black_24dp" />
+        android:foreground="@drawable/ripple"
+        android:src="@drawable/ic_play_circle_filled_black_24dp"
+        android:tint="@color/widgetAccent" />
 
     <ImageView
         android:id="@+id/app_gmail"
         android:layout_width="0dp"
-        android:layout_height="32dp"
+        android:layout_height="match_parent"
+        android:padding="12dp"
         android:layout_weight="1"
-        android:src="@drawable/ic_mail_black_24dp" />
+        android:foreground="@drawable/ripple"
+        android:src="@drawable/ic_mail_black_24dp"
+        android:tint="@color/widgetAccent" />
 
+    <ImageView
+        android:id="@+id/app_calc"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:padding="12dp"
+        android:layout_weight="1"
+        android:foreground="@drawable/ripple"
+        android:src="@drawable/ic_assessment_black_24dp"
+        android:tint="@color/widgetAccent" />
 
-    <ImageButton
+    <ImageView
+        android:id="@+id/app_gallery"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:padding="12dp"
+        android:layout_weight="1"
+        android:foreground="@drawable/ripple"
+        android:src="@drawable/ic_photo_black_24dp"
+        android:tint="@color/widgetAccent"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/app_music"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:padding="12dp"
+        android:layout_weight="1"
+        android:foreground="@drawable/ripple"
+        android:src="@drawable/ic_music_note_black_24dp"
+        android:tint="@color/widgetAccent" />
+
+    <ImageView
+        android:id="@+id/app_settings"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:padding="12dp"
+        android:layout_weight="1"
+        android:foreground="@drawable/ripple"
+        android:src="@drawable/ic_settings_black_24dp"
+        android:tint="@color/widgetAccent" />
+
+    <ImageView
         android:id="@+id/search"
         android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:padding="12dp"
         android:layout_weight="1"
-        android:background="#00000000"
-        android:clickable="true"
-        android:padding="2dp"
-        android:scaleType="centerInside"
-        android:src="@mipmap/google_g"
-        android:tint="@color/black" />
+        android:foreground="@drawable/ripple"
+        android:src="@drawable/ic_search_black_24dp"
+        android:tint="@color/widgetAccent"
+        android:visibility="gone" />
 
 </LinearLayout>

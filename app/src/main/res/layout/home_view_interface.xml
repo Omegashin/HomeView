@@ -3,45 +3,82 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/card_view"
+    android:backgroundTint="@color/blue_grey_800"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/alarm_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:foreground="@drawable/ripple"
+            android:orientation="vertical"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp">
+
+            <ImageView
+                android:id="@+id/alarm_image_view"
+                android:layout_width="22dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_alarm_black_24dp"
+                android:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/next_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:includeFontPadding="true"
+                android:text="Mon 9:20 PM"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextClock
+            android:id="@+id/app_calender"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/alarm_view"
+            android:fontFamily="sans-serif-condensed"
+            android:foreground="@drawable/ripple"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="34sp" />
+
+        <TextClock
+            android:id="@+id/foreign_text_clock"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/alarm_view"
+            android:fontFamily="sans-serif-condensed"
+            android:foreground="@drawable/ripple"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="34sp" />
+
+    </RelativeLayout>
 
     <ImageView
-        android:id="@+id/app_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_gravity="end"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_settings_black_24dp" />
-
-    <TextClock
-        android:id="@+id/system_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/card_view"
-        android:paddingStart="16dp"
-        android:textColor="@color/black"
-        android:textSize="32sp"
-        android:textStyle="bold" />
-
-    <TextClock
-        android:id="@+id/text_clock_foreign"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:textColor="@color/black"
-        android:textSize="32sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/next_alarm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:text="Next Alarm: Mon 9:20 PM"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:layout_height="1.6dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:alpha="0.2"
+        android:background="@color/widgetDivider" />
 
     <include layout="@layout/apps_dock" />
 

@@ -4,6 +4,7 @@
     <string name="search_hint">Search…</string>
     <string name="content_google_g">Google G</string>
     <string name="content_clear_button">Clear</string>
+    <string name="placeholder_label">Label</string>
 
     <string name="temp_name_pass">0</string>
 </resources>

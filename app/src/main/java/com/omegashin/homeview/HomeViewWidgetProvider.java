@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeViewWidgetProvider extends AppWidgetProvider {
 
@@ -66,11 +69,11 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
 
         //Set Next Alarm Info
         String nextAlarm = Settings.System.getString(context.getContentResolver(), Settings.System.NEXT_ALARM_FORMATTED);
-        remoteViews.setTextViewText(R.id.next_alarm, "Next Alarm: " + nextAlarm);
+        remoteViews.setTextViewText(R.id.next_alarm, nextAlarm);
 
         //Set Foreign Clock Time
         String foreignTimeZonePref = sharedPreferences.getString("foreignTimeZone", "");
-        remoteViews.setString(R.id.text_clock_foreign, "setTimeZone", foreignTimeZonePref);
+        remoteViews.setString(R.id.foreign_text_clock, "setTimeZone", foreignTimeZonePref);
 
 
         //Set chip labels
@@ -114,7 +117,7 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
             // Register an onClickListeners
 
             setOnClickIntent(remoteViews, R.id.search, ACTION_SEARCH);
-            setOnClickIntent(remoteViews, R.id.next_alarm, ACTION_SHOW_ALARMS);
+            setOnClickIntent(remoteViews, R.id.alarm_view, ACTION_SHOW_ALARMS);
             setOnClickIntent(remoteViews, R.id.app_calender, ACTION_CALENDER);
             setOnClickIntent(remoteViews, R.id.add_reminder, ACTION_ADD_CHIP);
             setOnClickIntent(remoteViews, R.id.app_settings, ACTION_SETTINGS);
@@ -261,7 +264,7 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
 
                 for (int h = 3; h <= 5; h++) {
                     editor.putString("chip_label_" + (h), sharedPreferences.getString("chip_label_" + (h + 1), ""));
-                    editor.putInt("reminderIcon_" + (h), sharedPreferences.getInt("chip_icon_" + (h + 1), R.drawable.ic_android_black_24dp));
+                    editor.putInt("chip_icon_" + (h), sharedPreferences.getInt("chip_icon_" + (h + 1), R.drawable.ic_android_black_24dp));
                     editor.apply();
                 }
 

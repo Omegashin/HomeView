@@ -7,9 +7,29 @@
     android:orientation="vertical"
     tools:context="com.omegashin.homeview.HomeViewConfig">
 
+    <EditText
+        android:id="@+id/inputSearch"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/grey_200"
+        android:fontFamily="sans-serif-condensed"
+        android:hint="Search Region..."
+        android:inputType="textVisiblePassword"
+        android:padding="16dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.6dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/grey_200" />
+
     <ListView
         android:id="@+id/time_zone_selection_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="0dp" />
 
 </LinearLayout>

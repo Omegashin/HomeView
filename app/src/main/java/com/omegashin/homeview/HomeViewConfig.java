@@ -2,31 +2,19 @@ package com.omegashin.homeview;
 
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RemoteViews;
-import android.widget.TextClock;
-import android.widget.Toast;
-
-import java.lang.reflect.Array;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
-import static android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID;
-import static java.security.AccessController.getContext;
+import android.widget.TextView;
 
 public class HomeViewConfig extends AppCompatActivity {
 
@@ -56,18 +44,40 @@ public class HomeViewConfig extends AppCompatActivity {
         }
 
         timeZoneSelectionList = (ListView) findViewById(R.id.time_zone_selection_list);
+        EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
 
         timeZoneSelectionListData = getResources().getStringArray(R.array.timeZoneIds);
-        timeZoneSelectionListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, timeZoneSelectionListData);
+        timeZoneSelectionListAdapter = new ArrayAdapter<>(this, R.layout.region_list_item, timeZoneSelectionListData);
 
         timeZoneSelectionList.setAdapter(timeZoneSelectionListAdapter);
+
+        inputSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                HomeViewConfig.this.timeZoneSelectionListAdapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
 
         timeZoneSelectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position,
                                     long arg3) {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("foreignTimeZone", timeZoneSelectionListData[position]);
+                editor.putString("foreignTimeZone", ((TextView) v).getText().toString());
                 editor.apply();
 
                 Intent intent = new Intent(getBaseContext(), HomeViewWidgetProvider.class);

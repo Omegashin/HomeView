@@ -12,7 +12,6 @@
         android:theme="@style/AppTheme">
         <receiver
             android:name=".HomeViewWidgetProvider"
-            android:icon="@drawable/ic_india_chip"
             android:label="Example Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -25,8 +24,7 @@
 
         <activity
             android:name=".HomeView"
-            android:label="@string/title_activity_home_view"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_home_view">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,9 +42,11 @@
             android:windowSoftInputMode="stateVisible">
 
         </activity>
-        <activity android:name=".HomeViewConfig">
+        <activity
+            android:name=".HomeViewConfig"
+            android:label="Configure Widget">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
     </application>
