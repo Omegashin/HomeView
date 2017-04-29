@@ -36,8 +36,8 @@ import static java.security.AccessController.getContext;
 public class ChipConfig extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
-    GridView reminderIconsGrid;
-    ReminderIconGridAdapter reminderIconGridAdapter;
+    GridView chipIconsGrid;
+    ReminderIconGridAdapter chipIconGridAdapter;
     int IconSelectPosition = -1;
 
     int[] imageId = {
@@ -70,7 +70,13 @@ public class ChipConfig extends AppCompatActivity {
             R.drawable.ic_local_movies_black_24dp,
             R.drawable.ic_group_black_24dp,
             R.drawable.ic_share_black_24dp,
-            R.drawable.ic_home_black_24dp
+            R.drawable.ic_home_black_24dp,
+            R.drawable.ic_mode_edit_black_24dp,
+            R.drawable.ic_chrome_reader_mode_black_24dp,
+            R.drawable.ic_adb_black_24dp,
+            R.drawable.ic_account_balance_wallet_black_24dp,
+            R.drawable.ic_announcement_black_24dp,
+            R.drawable.ic_bug_report_black_24dp,
     };
 
 
@@ -81,13 +87,12 @@ public class ChipConfig extends AppCompatActivity {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        final FloatingActionButton add = (FloatingActionButton) findViewById(R.id.add_button);
-        final EditText reminderName = (EditText) findViewById(R.id.reminder_name);
+        final FloatingActionButton add = (FloatingActionButton) findViewById(R.id.add_chip_button);
+        final EditText reminderName = (EditText) findViewById(R.id.chip_label);
 
         reminderName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    Log.e(HomeView.LOGTAG, "Enter pressed");
                     add.performClick();
                 }
                 return false;
@@ -113,7 +118,7 @@ public class ChipConfig extends AppCompatActivity {
 
                         if (sharedPreferences.getString("chip_label_" + i, "").equals("")) {
 
-                            editor.putString("chip_label_" + i, reminderName.getText().toString());
+                            editor.putString("chip_label_" + i, reminderName.getText().toString().trim());
                             editor.apply();
 
                             if (sharedPreferences.getInt("chip_icon_" + i, R.drawable.ic_android_black_24dp) == R.drawable.ic_android_black_24dp) {
@@ -123,33 +128,16 @@ public class ChipConfig extends AppCompatActivity {
 
                             }
 
-                            Log.e(HomeView.LOGTAG, "icon1: " + sharedPreferences.getInt("chip_icon_" + 1, R.drawable.ic_android_black_24dp));
-                            Log.e(HomeView.LOGTAG, "icon2: " + sharedPreferences.getInt("chip_icon_" + 2, R.drawable.ic_android_black_24dp));
-                            Log.e(HomeView.LOGTAG, "icon3: " + sharedPreferences.getInt("chip_icon_" + 3, R.drawable.ic_android_black_24dp));
-                            Log.e(HomeView.LOGTAG, "icon4: " + sharedPreferences.getInt("chip_icon_" + 4, R.drawable.ic_android_black_24dp));
-                            Log.e(HomeView.LOGTAG, "icon5: " + sharedPreferences.getInt("chip_icon_" + 5, R.drawable.ic_android_black_24dp));
-
                             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 
                             sendBroadcast(intent);
 
                             break;
-
                         }
-
                         if (sharedPreferences.getInt("chip_icon_" + i, R.drawable.ic_add_alert_black_24dp) == R.drawable.ic_add_alert_black_24dp) {
-
                             editor.putInt("chip_icon_" + i, imageId[IconSelectPosition]);
                             editor.apply();
-
                         }
-
-
-                        Log.e(HomeView.LOGTAG, "icon1: " + sharedPreferences.getInt("chip_icon_" + 1, R.drawable.ic_android_black_24dp));
-                        Log.e(HomeView.LOGTAG, "icon2: " + sharedPreferences.getInt("chip_icon_" + 2, R.drawable.ic_android_black_24dp));
-                        Log.e(HomeView.LOGTAG, "icon3: " + sharedPreferences.getInt("chip_icon_" + 3, R.drawable.ic_android_black_24dp));
-                        Log.e(HomeView.LOGTAG, "icon4: " + sharedPreferences.getInt("chip_icon_" + 4, R.drawable.ic_android_black_24dp));
-                        Log.e(HomeView.LOGTAG, "icon5: " + sharedPreferences.getInt("chip_icon_" + 5, R.drawable.ic_android_black_24dp));
                     }
 
                     finish();
@@ -158,40 +146,18 @@ public class ChipConfig extends AppCompatActivity {
             }
         });
 
-        reminderIconsGrid = (GridView) findViewById(R.id.reminder_icon_grid);
-        reminderIconGridAdapter = new ReminderIconGridAdapter(this, imageId);
+        chipIconsGrid = (GridView) findViewById(R.id.reminder_icon_grid_view);
+        chipIconGridAdapter = new ReminderIconGridAdapter(this, imageId);
 
-        reminderIconsGrid.setAdapter(reminderIconGridAdapter);
+        chipIconsGrid.setAdapter(chipIconGridAdapter);
 
-        reminderIconsGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        chipIconsGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-/*
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                for (int i = 1; i <= 5; i++) {
-
-                    if (sharedPreferences.getInt("reminderIcon_" + i, R.drawable.ic_android_black_24dp)==R.drawable.ic_android_black_24dp) {
-
-                        editor.putInt("reminderIcon_" + i, imageId[position]);
-                        editor.apply();
-
-                    }
-
-                    Log.e(HomeView.LOGTAG, "icon1: " + sharedPreferences.getInt("reminderIcon_" + 1, R.drawable.ic_android_black_24dp));
-                    Log.e(HomeView.LOGTAG, "icon2: " + sharedPreferences.getInt("reminderIcon_" + 2, R.drawable.ic_android_black_24dp));
-                    Log.e(HomeView.LOGTAG, "icon3: " + sharedPreferences.getInt("reminderIcon_" + 3, R.drawable.ic_android_black_24dp));
-                    Log.e(HomeView.LOGTAG, "icon4: " + sharedPreferences.getInt("reminderIcon_" + 4, R.drawable.ic_android_black_24dp));
-                    Log.e(HomeView.LOGTAG, "icon5: " + sharedPreferences.getInt("reminderIcon_" + 5, R.drawable.ic_android_black_24dp));
-
-                    Toast.makeText(getBaseContext(), "You Clicked at " + position, Toast.LENGTH_SHORT).show();
-
-
-                }*/
                 IconSelectPosition = position;
-                reminderIconsGrid.getSelectedItem();
+                chipIconsGrid.getSelectedItem();
 
             }
         });

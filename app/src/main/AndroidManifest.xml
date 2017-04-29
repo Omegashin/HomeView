@@ -49,6 +49,10 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DeveloperInfo"
+            android:label="Developer Info">
+        </activity>
     </application>
 
 </manifest>

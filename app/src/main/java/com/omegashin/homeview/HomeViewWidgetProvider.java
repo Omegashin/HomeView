@@ -29,7 +29,6 @@ import java.util.Locale;
 
 public class HomeViewWidgetProvider extends AppWidgetProvider {
 
-    public static final String ACTION_SEARCH = "com.omegashin.homeview.ACTION_SEARCH";
     public static final String ACTION_SHOW_ALARMS = "com.omegashin.homeview.ACTION_SHOW_ALARMS";
     public static final String ACTION_MAPS = "com.omegashin.homeview.ACTION_MAPS";
     public static final String ACTION_MUSIC = "com.omegashin.homeview.ACTION_MUSIC";
@@ -116,7 +115,6 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
 
             // Register an onClickListeners
 
-            setOnClickIntent(remoteViews, R.id.search, ACTION_SEARCH);
             setOnClickIntent(remoteViews, R.id.alarm_view, ACTION_SHOW_ALARMS);
             setOnClickIntent(remoteViews, R.id.app_calender, ACTION_CALENDER);
             setOnClickIntent(remoteViews, R.id.add_reminder, ACTION_ADD_CHIP);
@@ -164,17 +162,11 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
         List<PackageInfo> packs = pm.getInstalledPackages(0);
 
         switch (intent.getAction()) {
-            case ACTION_SEARCH:
-
-                Intent dhintent = new Intent(context, Search.class);
-                dhintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                context.startActivity(dhintent);
-                break;
 
             case ACTION_SHOW_ALARMS:
-                Intent i = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(i);
+                Intent intent2 = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent2);
                 break;
 
             case ACTION_CALENDER:
@@ -372,7 +364,7 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
 
                 for (PackageInfo pi : packs) {
                     if (pi.packageName.toLowerCase().contains("calcul")) {
-                        HashMap<String, Object> map = new HashMap<String, Object>();
+                        HashMap<String, Object> map = new HashMap<>();
                         map.put("appName", pi.applicationInfo.loadLabel(pm));
                         map.put("packageName", pi.packageName);
                         items.add(map);
@@ -394,7 +386,7 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
 
                 for (PackageInfo pi : packs) {
                     if (pi.packageName.toLowerCase().contains("gallery")) {
-                        HashMap<String, Object> map = new HashMap<String, Object>();
+                        HashMap<String, Object> map = new HashMap<>();
                         map.put("appName", pi.applicationInfo.loadLabel(pm));
                         map.put("packageName", pi.packageName);
                         items.add(map);

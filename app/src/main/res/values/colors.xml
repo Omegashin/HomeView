@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorBackground">#eeeeee</color>
+    <color name="colorPrimary">#607D8B</color>
+    <color name="colorPrimaryDark">#455A64</color>
+    <color name="colorAccent">#4db6ac</color>
+    <color name="colorBackground">#607D8B</color>
+    <color name="textColorPrimary">#212121</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
+    <color name="logoRing">#ffffff</color>
+
     <color name="transparent">#00000000</color>
 
-    <color name="widgetAccent">#94eae2</color>
+    <color name="widgetAccent">#FFFFFF</color>
     <color name="widgetDivider">#ffffff</color>
 
     //CardView for Widgets

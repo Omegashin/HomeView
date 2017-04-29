@@ -4,7 +4,30 @@
     <string name="search_hint">Search…</string>
     <string name="content_google_g">Google G</string>
     <string name="content_clear_button">Clear</string>
-    <string name="placeholder_label">Label</string>
+    <string name="placeholder_label">Empty Label</string>
+
+    //Chip Config
+    <string name="chip_label_hint">I want this reminder to be about…</string>
+    <string name="chip_label_restriction">Using only 24 letters!</string>
+    <string name="chip_icons_grid_header">Which i can remember with a…</string>
 
     <string name="temp_name_pass">0</string>
+
+    <string name="help_text">To use HomeView, Add its widget to the home screen of your favored launcher.</string>
+    <string name="help_image">Help Image</string>
+
+    //Developer Info
+    <string name="app_version">Version 1.0</string>
+    <string name="app_full_name">HomeView for Android</string>
+    <string name="dev_name">Arshdeep Singh Saini</string>
+    <string name="dev_desc">App creator, Designer and Programmer. </string>
+    <string name="gplus_follow">Google+</string>
+    <string name="fb_follow">Facebook</string>
+    <string name="thanks">Special thanks to all beta testers!</string>
+
+    <string name="content_dev_logo">Developer Logo</string>
+    <string name="content_dev_cover">Developer Cover Photo</string>
+    <string name="content_g_plus_logo">Google Plus</string>
+    <string name="content_fb_logo">Facebook</string>
+    <string name="content_app_logo">App Logo</string>
 </resources>

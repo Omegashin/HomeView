@@ -9,29 +9,30 @@
         android:id="@+id/app_maps"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:padding="12dp"
         android:layout_weight="1"
         android:foreground="@drawable/ripple"
+        android:padding="16dp"
         android:src="@drawable/ic_place_black_24dp"
         android:tint="@color/widgetAccent" />
 
     <ImageView
         android:id="@+id/app_calender"
         android:layout_width="0dp"
-        android:visibility="gone"
         android:layout_height="32dp"
-        android:foreground="@drawable/ripple"
         android:layout_weight="1"
+        android:padding="16dp"
+        android:foreground="@drawable/ripple"
         android:src="@drawable/ic_today_black_24dp"
-        android:tint="@color/widgetAccent" />
+        android:tint="@color/widgetAccent"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/app_store"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:padding="12dp"
         android:layout_weight="1"
         android:foreground="@drawable/ripple"
+        android:padding="16dp"
         android:src="@drawable/ic_play_circle_filled_black_24dp"
         android:tint="@color/widgetAccent" />
 
@@ -39,9 +40,9 @@
         android:id="@+id/app_gmail"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:padding="12dp"
         android:layout_weight="1"
         android:foreground="@drawable/ripple"
+        android:padding="16dp"
         android:src="@drawable/ic_mail_black_24dp"
         android:tint="@color/widgetAccent" />
 
@@ -49,9 +50,9 @@
         android:id="@+id/app_calc"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:padding="12dp"
         android:layout_weight="1"
         android:foreground="@drawable/ripple"
+        android:padding="16dp"
         android:src="@drawable/ic_assessment_black_24dp"
         android:tint="@color/widgetAccent" />
 
@@ -59,9 +60,9 @@
         android:id="@+id/app_gallery"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:padding="12dp"
         android:layout_weight="1"
         android:foreground="@drawable/ripple"
+        android:padding="12dp"
         android:src="@drawable/ic_photo_black_24dp"
         android:tint="@color/widgetAccent"
         android:visibility="gone" />
@@ -70,9 +71,9 @@
         android:id="@+id/app_music"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:padding="12dp"
         android:layout_weight="1"
         android:foreground="@drawable/ripple"
+        android:padding="16dp"
         android:src="@drawable/ic_music_note_black_24dp"
         android:tint="@color/widgetAccent" />
 
@@ -80,21 +81,10 @@
         android:id="@+id/app_settings"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:padding="12dp"
         android:layout_weight="1"
         android:foreground="@drawable/ripple"
+        android:padding="16dp"
         android:src="@drawable/ic_settings_black_24dp"
         android:tint="@color/widgetAccent" />
-
-    <ImageView
-        android:id="@+id/search"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:padding="12dp"
-        android:layout_weight="1"
-        android:foreground="@drawable/ripple"
-        android:src="@drawable/ic_search_black_24dp"
-        android:tint="@color/widgetAccent"
-        android:visibility="gone" />
 
 </LinearLayout>

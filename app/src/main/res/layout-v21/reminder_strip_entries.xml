@@ -1,12 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:background="@color/blue_grey_700" />
+        android:background="@color/black" />
 
     <LinearLayout
         android:id="@+id/reminder_strip"
@@ -16,8 +15,7 @@
         android:backgroundTint="@color/black"
         android:baselineAligned="false"
         android:gravity="center"
-        android:orientation="horizontal"
-        tools:targetApi="lollipop">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/reminder_entry_1"
