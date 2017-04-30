@@ -13,7 +13,6 @@
     <color name="transparent">#00000000</color>
 
     <color name="widgetAccent">#FFFFFF</color>
-    <color name="widgetDivider">#ffffff</color>
 
     //CardView for Widgets
     <color name="card_background">#ffffff</color>

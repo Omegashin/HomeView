@@ -10,14 +10,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import android.content.res.AssetManager;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.AlarmClock;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -25,7 +22,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class HomeViewWidgetProvider extends AppWidgetProvider {
 
@@ -109,8 +105,6 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
         //ComponentName thisWidget = new ComponentName(context,HomeViewWidgetProvider.class);
         int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
         for (int widgetId : allWidgetIds) {
-
-            Log.e(HomeView.LOGTAG, "Updated Widget: " + String.valueOf(widgetId));
             // Set the text
 
             // Register an onClickListeners
@@ -194,18 +188,6 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
                     editor.apply();
                 }
 
-                Log.e(HomeView.LOGTAG, "rem1: " + sharedPreferences.getString("chip_label_" + 1, ""));
-                Log.e(HomeView.LOGTAG, "rem2: " + sharedPreferences.getString("chip_label_" + 2, ""));
-                Log.e(HomeView.LOGTAG, "rem3: " + sharedPreferences.getString("chip_label_" + 3, ""));
-                Log.e(HomeView.LOGTAG, "rem4: " + sharedPreferences.getString("chip_label_" + 4, ""));
-                Log.e(HomeView.LOGTAG, "rem5: " + sharedPreferences.getString("chip_label_" + 5, ""));
-
-                Log.e(HomeView.LOGTAG, "icon1: " + sharedPreferences.getInt("chip_icon_" + 1, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon2: " + sharedPreferences.getInt("chip_icon_" + 2, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon3: " + sharedPreferences.getInt("chip_icon_" + 3, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon4: " + sharedPreferences.getInt("chip_icon_" + 4, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon5: " + sharedPreferences.getInt("chip_icon_" + 5, R.drawable.ic_android_black_24dp));
-
 
                 Bundle extras = intent.getExtras();
                 if (extras != null) {
@@ -231,18 +213,6 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
                     editor.apply();
                 }
 
-                Log.e(HomeView.LOGTAG, "rem1: " + sharedPreferences.getString("chip_label_" + 1, ""));
-                Log.e(HomeView.LOGTAG, "rem2: " + sharedPreferences.getString("chip_label_" + 2, ""));
-                Log.e(HomeView.LOGTAG, "rem3: " + sharedPreferences.getString("chip_label_" + 3, ""));
-                Log.e(HomeView.LOGTAG, "rem4: " + sharedPreferences.getString("chip_label_" + 4, ""));
-                Log.e(HomeView.LOGTAG, "rem5: " + sharedPreferences.getString("chip_label_" + 5, ""));
-
-                Log.e(HomeView.LOGTAG, "icon1: " + sharedPreferences.getInt("chip_icon_" + 1, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon2: " + sharedPreferences.getInt("chip_icon_" + 2, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon3: " + sharedPreferences.getInt("chip_icon_" + 3, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon4: " + sharedPreferences.getInt("chip_icon_" + 4, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon5: " + sharedPreferences.getInt("chip_icon_" + 5, R.drawable.ic_android_black_24dp));
-
                 updateWidget(context, intent);
 
                 break;
@@ -259,19 +229,6 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
                     editor.putInt("chip_icon_" + (h), sharedPreferences.getInt("chip_icon_" + (h + 1), R.drawable.ic_android_black_24dp));
                     editor.apply();
                 }
-
-                Log.e(HomeView.LOGTAG, "rem1: " + sharedPreferences.getString("chip_label_" + 1, ""));
-                Log.e(HomeView.LOGTAG, "rem2: " + sharedPreferences.getString("chip_label_" + 2, ""));
-                Log.e(HomeView.LOGTAG, "rem3: " + sharedPreferences.getString("chip_label_" + 3, ""));
-                Log.e(HomeView.LOGTAG, "rem4: " + sharedPreferences.getString("chip_label_" + 4, ""));
-                Log.e(HomeView.LOGTAG, "rem5: " + sharedPreferences.getString("chip_label_" + 5, ""));
-
-                Log.e(HomeView.LOGTAG, "icon1: " + sharedPreferences.getInt("chip_icon_" + 1, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon2: " + sharedPreferences.getInt("chip_icon_" + 2, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon3: " + sharedPreferences.getInt("chip_icon_" + 3, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon4: " + sharedPreferences.getInt("chip_icon_" + 4, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon5: " + sharedPreferences.getInt("chip_icon_" + 5, R.drawable.ic_android_black_24dp));
-
                 updateWidget(context, intent);
 
                 break;
@@ -289,18 +246,6 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
                     editor.apply();
                 }
 
-                Log.e(HomeView.LOGTAG, "rem1: " + sharedPreferences.getString("chip_label_" + 1, ""));
-                Log.e(HomeView.LOGTAG, "rem2: " + sharedPreferences.getString("chip_label_" + 2, ""));
-                Log.e(HomeView.LOGTAG, "rem3: " + sharedPreferences.getString("chip_label_" + 3, ""));
-                Log.e(HomeView.LOGTAG, "rem4: " + sharedPreferences.getString("chip_label_" + 4, ""));
-                Log.e(HomeView.LOGTAG, "rem5: " + sharedPreferences.getString("chip_label_" + 5, ""));
-
-                Log.e(HomeView.LOGTAG, "icon1: " + sharedPreferences.getInt("chip_icon_" + 1, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon2: " + sharedPreferences.getInt("chip_icon_" + 2, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon3: " + sharedPreferences.getInt("chip_icon_" + 3, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon4: " + sharedPreferences.getInt("chip_icon_" + 4, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon5: " + sharedPreferences.getInt("chip_icon_" + 5, R.drawable.ic_android_black_24dp));
-
                 updateWidget(context, intent);
 
                 break;
@@ -317,18 +262,6 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
                     editor.putInt("chip_icon_" + (h), sharedPreferences.getInt("chip_icon_" + (h + 1), R.drawable.ic_android_black_24dp));
                     editor.apply();
                 }
-
-                Log.e(HomeView.LOGTAG, "rem1: " + sharedPreferences.getString("chip_label_" + 1, ""));
-                Log.e(HomeView.LOGTAG, "rem2: " + sharedPreferences.getString("chip_label_" + 2, ""));
-                Log.e(HomeView.LOGTAG, "rem3: " + sharedPreferences.getString("chip_label_" + 3, ""));
-                Log.e(HomeView.LOGTAG, "rem4: " + sharedPreferences.getString("chip_label_" + 4, ""));
-                Log.e(HomeView.LOGTAG, "rem5: " + sharedPreferences.getString("chip_label_" + 5, ""));
-
-                Log.e(HomeView.LOGTAG, "icon1: " + sharedPreferences.getInt("chip_icon_" + 1, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon2: " + sharedPreferences.getInt("chip_icon_" + 2, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon3: " + sharedPreferences.getInt("chip_icon_" + 3, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon4: " + sharedPreferences.getInt("chip_icon_" + 4, R.drawable.ic_android_black_24dp));
-                Log.e(HomeView.LOGTAG, "icon5: " + sharedPreferences.getInt("chip_icon_" + 5, R.drawable.ic_android_black_24dp));
 
                 updateWidget(context, intent);
 

@@ -1,10 +1,11 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:configure="com.omegashin.homeview.HomeViewConfig"
     android:initialLayout="@layout/home_view_interface"
     android:minHeight="192dp"
-    android:minWidth="320dp"
+    android:minResizeHeight="192dp"
     android:minResizeWidth="320dp"
+    android:minWidth="320dp"
     android:previewImage="@drawable/homeview_preview"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0"
-    android:configure="com.omegashin.homeview.HomeViewConfig"
-    android:widgetCategory="home_screen|keyguard" />
+    android:widgetCategory="home_screen|keyguard|searchbox" />
