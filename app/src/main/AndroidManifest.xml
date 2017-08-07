@@ -7,15 +7,17 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:fullBackupContent="true"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <receiver
             android:name=".HomeViewWidgetProvider"
-            android:label="HomeView">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.app.action.NEXT_ALARM_CLOCK_CHANGED" />
             </intent-filter>
 
             <meta-data
@@ -24,36 +26,61 @@
         </receiver>
 
         <activity
-            android:name=".HomeView"
-            android:label="@string/title_activity_home_view">
+            android:name=".DashDock"
+            android:label="@string/title_dash_dock">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Search"
+            android:name=".Activity_Search"
             android:theme="@style/SearchBarTheme"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".Activity_AddReminder"
+            android:theme="@style/ReminderDialogTheme"
             android:windowSoftInputMode="stateVisible">
-
+            <intent-filter>
+                <action android:name="android.intent.action.RUN" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".ChipConfig"
-            android:windowSoftInputMode="stateVisible">
-
-        </activity>
-        <activity
-            android:name=".HomeViewConfig"
+            android:name=".Activity_HomeViewConfig"
             android:label="Configure Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".DeveloperInfo"
-            android:label="Developer Info">
+            android:name=".Activity_DeveloperInfo"
+            android:label="Developer Info" />
+        <activity
+            android:name=".Activity_WidgetSettings"
+            android:label="@string/title_widget_settings" />
+        <activity
+            android:name=".Activity_PackageList"
+            android:label="Installed Apps">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
+
+        <service
+            android:name=".AppGridService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service
+            android:name=".ReminderGridService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <activity
+            android:name=".Activity_AppIconsList"
+            android:label="@string/title_app_icons_list" />
+        <activity android:name=".Activity_AddAppIcon" />
+        <activity android:name=".Activity_IconReturn" />
+        <activity
+            android:name=".WidgetStyle"
+            android:theme="@style/ReminderDialogTheme" />
     </application>
 
 </manifest>

@@ -5,17 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.omegashin.homeview.HomeViewConfig">
+    tools:context="com.omegashin.homeview.Activity_HomeViewConfig">
 
     <EditText
         android:id="@+id/inputSearch"
         android:layout_width="fill_parent"
+        android:textCursorDrawable="@color/white"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/grey_200"
+        android:background="@color/primary"
+        android:foreground="?selectableItemBackgroundBorderless"
         android:fontFamily="sans-serif-condensed"
-        android:hint="Search Region..."
+        android:hint="@string/tz_search_hint"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey_200"
         android:inputType="textVisiblePassword"
         android:padding="16dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1.2dp"
+        android:background="@color/primary_dark"
+        android:contentDescription="@string/content_widget_divider" />
 
     <View
         android:layout_width="match_parent"

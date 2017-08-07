@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#607D8B</color>
-    <color name="colorPrimaryDark">#455A64</color>
-    <color name="colorAccent">#4db6ac</color>
-    <color name="colorBackground">#607D8B</color>
-    <color name="textColorPrimary">#212121</color>
+
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="primary_light">#C5CAE9</color>
+    <color name="accent">#3F51B5</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
@@ -14,8 +19,14 @@
 
     <color name="widgetAccent">#FFFFFF</color>
 
-    //CardView for Widgets
-    <color name="card_background">#ffffff</color>
+    //Widgets
+    <color name="w_accent_white">#FFFFFF</color>
+    <color name="w_accent_dark">#FFFFFF</color>
+    <color name="w_accent_teal">#80CBC4</color>
+    <color name="card_view_dark">#6F000000</color>
+    <color name="card_view_light">#1FFFFFFF</color>
+    <color name="card_view_teal">#333333</color>
+    <color name="card_background_light">#40FFFFFF</color>
     <color name="card_shadow_1">#d4d4d4</color>
     <color name="card_shadow_2">#dddddd</color>
     <color name="card_detailing">#eee</color>
@@ -222,6 +233,7 @@
     <color name="brown_800">#4e342e</color>
     <color name="brown_900">#3e2723</color>
 
+    <color name="grey_100">#FAFAFA</color>
     <color name="grey_200">#eeeeee</color>
     <color name="grey_300">#e0e0e0</color>
     <color name="grey_400">#bdbdbd</color>

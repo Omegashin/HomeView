@@ -1,5 +1,6 @@
 package com.omegashin.homeview;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -7,128 +8,153 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-
 import android.net.Uri;
-import android.os.Bundle;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.AlarmClock;
-import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeViewWidgetProvider extends AppWidgetProvider {
 
+    public static final String ACTION_CLICK_APP = "com.omegashin.homeview.APP_OPEN";
+    public static final String ACTION_ADD_REMINDER = "com.omegashin.homeview.ADD_REMINDER";
+    public static final String ACTION_CLICK_REMINDER = "com.omegashin.homeview.CLICK_REMINDER";
+    public static final String APP_POSITION = "com.omegashin.homeview.APP_POSITION";
+    public static final String REMINDER_POSITION = "com.omegashin.homeview.REMINDER_POSITION";
     public static final String ACTION_SHOW_ALARMS = "com.omegashin.homeview.ACTION_SHOW_ALARMS";
-    public static final String ACTION_MAPS = "com.omegashin.homeview.ACTION_MAPS";
-    public static final String ACTION_MUSIC = "com.omegashin.homeview.ACTION_MUSIC";
-    public static final String ACTION_STORE = "com.omegashin.homeview.ACTION_STORE";
-    public static final String ACTION_CALC = "com.omegashin.homeview.ACTION_CALC";
-    public static final String ACTION_GALLERY = "com.omegashin.homeview.ACTION_GALLERY";
-    public static final String ACTION_G_MAIL = "com.omegashin.homeview.ACTION_G_MAIL";
-
     public static final String ACTION_CALENDER = "com.omegashin.homeview.ACTION_CALENDER";
-    public static final String ACTION_ADD_CHIP = "com.omegashin.homeview.ACTION_ADD_CHIP";
-    public static final String ACTION_SETTINGS = "com.omegashin.homeview.ACTION_SETTINGS";
-
-    public static final String ACTION_REMOVE_CHIP_1 = "com.omegashin.homeview.ACTION_REMOVE_CHIP_1";
-    public static final String ACTION_REMOVE_CHIP_2 = "com.omegashin.homeview.ACTION_REMOVE_CHIP_2";
-    public static final String ACTION_REMOVE_CHIP_3 = "com.omegashin.homeview.ACTION_REMOVE_CHIP_3";
-    public static final String ACTION_REMOVE_CHIP_4 = "com.omegashin.homeview.ACTION_REMOVE_CHIP_4";
-    public static final String ACTION_REMOVE_CHIP_5 = "com.omegashin.homeview.ACTION_REMOVE_CHIP_5";
 
     Context context;
     int[] appWidgetIds;
     AppWidgetManager appWidgetManager;
-    SharedPreferences sharedPreferences;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
         this.context = context;
 
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.home_view_interface);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.hvi_dark);
+
+        if (sharedPreferences.getString("theme", "dark").equals("dark")) {
+            remoteViews = new RemoteViews(context.getPackageName(), R.layout.hvi_dark);
+        } else if (sharedPreferences.getString("theme", "dark").equals("light")) {
+            remoteViews = new RemoteViews(context.getPackageName(), R.layout.hvi_light);
+        }
 
         ComponentName thisWidget = new ComponentName(context, HomeViewWidgetProvider.class);
         this.appWidgetIds = appWidgetIds;
         this.appWidgetManager = appWidgetManager;
 
         //Set Next Alarm Info
-        String nextAlarm = Settings.System.getString(context.getContentResolver(), Settings.System.NEXT_ALARM_FORMATTED);
-        remoteViews.setTextViewText(R.id.next_alarm, nextAlarm);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager.getNextAlarmClock() != null) {
+            long nextAlarmTime = alarmManager.getNextAlarmClock().getTriggerTime();
+            Date nextAlarmDate = new Date(nextAlarmTime);
+            SimpleDateFormat fmtOut = new SimpleDateFormat("EEE @ H:mm a", Locale.ENGLISH);
+            fmtOut.format(nextAlarmDate);
+            //String nextAlarm = Settings.System.getString(context.getContentResolver(), Settings.System.NEXT_ALARM_FORMATTED);
+            remoteViews.setTextViewText(R.id.alarm_parent, "Alarm - " + fmtOut.format(nextAlarmDate));
+        } else {
+            remoteViews.setTextViewText(R.id.alarm_parent, context.getResources().getString(R.string.label_no_alarms));
+        }
 
         //Set Foreign Clock Time
         String foreignTimeZonePref = sharedPreferences.getString("foreignTimeZone", "");
         remoteViews.setString(R.id.foreign_text_clock, "setTimeZone", foreignTimeZonePref);
 
+        //final WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
+        //final Drawable wallpaperDrawable = wallpaperManager.getDrawable();
 
-        //Set chip labels
-        remoteViews.setTextViewText(R.id.reminder_label_1, sharedPreferences.getString("chip_label_" + 1, ""));
-        remoteViews.setTextViewText(R.id.reminder_label_2, sharedPreferences.getString("chip_label_" + 2, ""));
-        remoteViews.setTextViewText(R.id.reminder_label_3, sharedPreferences.getString("chip_label_" + 3, ""));
-        remoteViews.setTextViewText(R.id.reminder_label_4, sharedPreferences.getString("chip_label_" + 4, ""));
-        remoteViews.setTextViewText(R.id.reminder_label_5, sharedPreferences.getString("chip_label_" + 5, ""));
-        //Set chip icons
-        remoteViews.setImageViewResource(R.id.reminder_icon_1, sharedPreferences.getInt("chip_icon_" + 1, R.drawable.ic_add_alert_black_24dp));
-        remoteViews.setImageViewResource(R.id.reminder_icon_2, sharedPreferences.getInt("chip_icon_" + 2, R.drawable.ic_add_alert_black_24dp));
-        remoteViews.setImageViewResource(R.id.reminder_icon_3, sharedPreferences.getInt("chip_icon_" + 3, R.drawable.ic_add_alert_black_24dp));
-        remoteViews.setImageViewResource(R.id.reminder_icon_4, sharedPreferences.getInt("chip_icon_" + 4, R.drawable.ic_add_alert_black_24dp));
-        remoteViews.setImageViewResource(R.id.reminder_icon_5, sharedPreferences.getInt("chip_icon_" + 5, R.drawable.ic_add_alert_black_24dp));
+        //Palette palette = Palette.generate(((BitmapDrawable) (wallpaperDrawable)).getBitmap());
 
+        //Log.e("color: ", String.valueOf(palette.getDarkMutedColor(context.getResources().getColor(R.color.blue_300,context.getTheme()))));
 
-        /*if (sharedPreferences.getInt("chip_icon_5", R.drawable.ic_add_alert_black_24dp) == R.drawable.ic_add_alert_black_24dp) {
-            remoteViews.setViewVisibility(R.id.add_reminder, View.VISIBLE);
-        } else {
-            remoteViews.setViewVisibility(R.id.add_reminder, View.GONE);
-        }*/
+        //int darkVibrant = palette.getVibrantColor(context.getResources().getColor(R.color.blue_300,context.getTheme()));
+        //int lightVibrant = palette.getDarkMutedColor(context.getResources().getColor(R.color.blue_300,context.getTheme()));
 
-        for (int i = 1; i <= 5; i++) {
+        //remoteViews.setTextColor(R.id.foreign_text_clock,palette.getLightVibrantColor(context.getResources().getColor(R.color.blue_300,context.getTheme())));
+        //remoteViews.setInt(R.id.alarm_parent, "setBackgroundColor", darkVibrant);
+        //remoteViews.setInt(R.id.clock_parent, "setBackgroundColor", darkVibrant);
+        //remoteViews.setInt(R.id.apps_gridview, "setBackgroundColor", lightVibrant);
+        //remoteViews.setInt(R.id.reminders_gridview, "setBackgroundColor", lightVibrant);
+        //remoteViews.setInt(R.id.add_reminder, "setBackgroundColor", lightVibrant);
 
-            remoteViews.setViewVisibility(context.getResources().getIdentifier("reminder_entry_" + i, "id", context.getPackageName()), View.VISIBLE);
-
-            if (sharedPreferences.getString("chip_label_" + i, "").equals("")) {
-
-                remoteViews.setViewVisibility(context.getResources().getIdentifier("reminder_entry_" + i, "id", context.getPackageName()), View.GONE);
-            }
-        }
-
-        // Get all ids
-        //ComponentName thisWidget = new ComponentName(context,HomeViewWidgetProvider.class);
         int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-        for (int widgetId : allWidgetIds) {
-            // Set the text
+        for (int appWidgetId : allWidgetIds) {
 
-            // Register an onClickListeners
+            if (sharedPreferences.getBoolean("showClock" + appWidgetId, false)) {
+                remoteViews.setViewVisibility(R.id.clock_parent, View.VISIBLE);
+            } else {
+                remoteViews.setViewVisibility(R.id.clock_parent, View.GONE);
+            }
 
-            setOnClickIntent(remoteViews, R.id.alarm_view, ACTION_SHOW_ALARMS);
+            if (sharedPreferences.getBoolean("showApps" + appWidgetId, false)) {
+                remoteViews.setViewVisibility(R.id.apps_gridview, View.VISIBLE);
+            } else {
+                remoteViews.setViewVisibility(R.id.apps_gridview, View.GONE);
+            }
+
+            if (sharedPreferences.getBoolean("showReminders" + appWidgetId, false)) {
+                remoteViews.setViewVisibility(R.id.reminders_parent, View.VISIBLE);
+            } else {
+                remoteViews.setViewVisibility(R.id.reminders_parent, View.GONE);
+            }
+
+            Intent svcIntent = new Intent(context, AppGridService.class);
+            svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+
+            Intent svc2Intent = new Intent(context, ReminderGridService.class);
+            svc2Intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            svc2Intent.setData(Uri.parse(svc2Intent.toUri(Intent.URI_INTENT_SCHEME)));
+
+            remoteViews.setRemoteAdapter(R.id.apps_gridview, svcIntent);
+
+            Intent clickIntent = new Intent(context, HomeViewWidgetProvider.class);
+            clickIntent.setAction(HomeViewWidgetProvider.ACTION_CLICK_APP);
+            clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            clickIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+            PendingIntent clickPI = PendingIntent.getBroadcast(context, 0, clickIntent, 0);
+            remoteViews.setPendingIntentTemplate(R.id.apps_gridview, clickPI);
+
+            remoteViews.setRemoteAdapter(R.id.reminders_gridview, svc2Intent);
+
+            Intent reminderGridIntent = new Intent(context, HomeViewWidgetProvider.class);
+            reminderGridIntent.setAction(HomeViewWidgetProvider.ACTION_CLICK_REMINDER);
+            reminderGridIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            reminderGridIntent.setData(Uri.parse(svc2Intent.toUri(Intent.URI_INTENT_SCHEME)));
+            PendingIntent ReminderClickPI = PendingIntent.getBroadcast(context, 0, reminderGridIntent, 0);
+            remoteViews.setPendingIntentTemplate(R.id.reminders_gridview, ReminderClickPI);
+
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.apps_gridview);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.reminders_gridview);
+
+            setOnClickIntent(remoteViews, R.id.alarm_parent, ACTION_SHOW_ALARMS);
             setOnClickIntent(remoteViews, R.id.app_calender, ACTION_CALENDER);
-            setOnClickIntent(remoteViews, R.id.add_reminder, ACTION_ADD_CHIP);
-            setOnClickIntent(remoteViews, R.id.app_settings, ACTION_SETTINGS);
-            setOnClickIntent(remoteViews, R.id.reminder_entry_1, ACTION_REMOVE_CHIP_1);
-            setOnClickIntent(remoteViews, R.id.reminder_entry_2, ACTION_REMOVE_CHIP_2);
-            setOnClickIntent(remoteViews, R.id.reminder_entry_3, ACTION_REMOVE_CHIP_3);
-            setOnClickIntent(remoteViews, R.id.reminder_entry_4, ACTION_REMOVE_CHIP_4);
-            setOnClickIntent(remoteViews, R.id.reminder_entry_5, ACTION_REMOVE_CHIP_5);
+            setOnClickIntent(remoteViews, R.id.add_reminder, ACTION_ADD_REMINDER);
 
-            setOnClickIntent(remoteViews, R.id.app_maps, ACTION_MAPS);
-            setOnClickIntent(remoteViews, R.id.app_music, ACTION_MUSIC);
-            setOnClickIntent(remoteViews, R.id.app_store, ACTION_STORE);
-            setOnClickIntent(remoteViews, R.id.app_calc, ACTION_CALC);
-            setOnClickIntent(remoteViews, R.id.app_gallery, ACTION_GALLERY);
-            setOnClickIntent(remoteViews, R.id.app_gmail, ACTION_G_MAIL);
-
-            appWidgetManager.updateAppWidget(widgetId, remoteViews);
+            appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
 
         }
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
     public void setOnClickIntent(RemoteViews remoteViews, int resId, String intentActionName) {
@@ -138,24 +164,46 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         remoteViews.setOnClickPendingIntent(resId, pendingIntent);
+
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onReceive(Context context, Intent intent) {
 
         super.onReceive(context, intent);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.home_view_interface);
-
-        ArrayList<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
-
-        final PackageManager pm = context.getPackageManager();
-        List<PackageInfo> packs = pm.getInstalledPackages(0);
-
         switch (intent.getAction()) {
+
+            case ACTION_CLICK_APP:
+                int viewIndex = intent.getIntExtra(APP_POSITION, 0);
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<AppIcon>>() {
+                }.getType();
+                ArrayList<AppIcon> list = gson.fromJson(sharedPreferences.getString("appIconsData", "[]"), type);
+
+                openApp(context, list.get(viewIndex).getAppPackage());
+                break;
+
+            case ACTION_ADD_REMINDER:
+                Intent reminderAddIntent = new Intent(context, Activity_AddReminder.class);
+                reminderAddIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                reminderAddIntent.putExtra("isEdit", false);
+                context.startActivity(reminderAddIntent);
+                break;
+
+            case ACTION_CLICK_REMINDER:
+                Intent reminderClickIntent = new Intent(context, Activity_AddReminder.class);
+                reminderClickIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                reminderClickIntent.putExtra("isEdit", true);
+                reminderClickIntent.putExtra("index", intent.getIntExtra(REMINDER_POSITION, 0));
+                context.startActivity(reminderClickIntent);
+                break;
+
 
             case ACTION_SHOW_ALARMS:
                 Intent intent2 = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
@@ -169,186 +217,16 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
                 context.startActivity(calenderIntent);
                 break;
 
-            case ACTION_ADD_CHIP:
-                Intent reminderIntent = new Intent(context, ChipConfig.class);
-                reminderIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                context.startActivity(reminderIntent);
-                break;
+            case AlarmManager.ACTION_NEXT_ALARM_CLOCK_CHANGED:
 
-            case ACTION_REMOVE_CHIP_1:
-                editor.putString("chip_label_" + 1, "");
-                editor.putInt("chip_icon_" + 1, R.drawable.ic_android_black_24dp);
-                editor.apply();
-
-                hideRevealChips(remoteViews, context, 1);
-
-                for (int h = 1; h <= 5; h++) {
-                    editor.putString("chip_label_" + (h), sharedPreferences.getString("chip_label_" + (h + 1), ""));
-                    editor.putInt("chip_icon_" + (h), sharedPreferences.getInt("chip_icon_" + (h + 1), R.drawable.ic_android_black_24dp));
-                    editor.apply();
-                }
-
-
-                Bundle extras = intent.getExtras();
-                if (extras != null) {
-                    AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                    ComponentName thisAppWidget = new ComponentName(context.getPackageName(), HomeViewWidgetProvider.class.getName());
-                    int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
-
-                    onUpdate(context, appWidgetManager, appWidgetIds);
-                }
-
-                break;
-
-            case ACTION_REMOVE_CHIP_2:
-                editor.putString("chip_label_" + 2, "");
-                editor.putInt("chip_icon_" + 2, R.drawable.ic_android_black_24dp);
-                editor.apply();
-
-                hideRevealChips(remoteViews, context, 2);
-
-                for (int h = 2; h <= 5; h++) {
-                    editor.putString("chip_label_" + (h), sharedPreferences.getString("chip_label_" + (h + 1), ""));
-                    editor.putInt("chip_icon_" + (h), sharedPreferences.getInt("chip_icon_" + (h + 1), R.drawable.ic_android_black_24dp));
-                    editor.apply();
-                }
-
-                updateWidget(context, intent);
-
-                break;
-
-            case ACTION_REMOVE_CHIP_3:
-                editor.putString("chip_label_" + 3, "");
-                editor.putInt("chip_icon_" + 3, R.drawable.ic_android_black_24dp);
-                editor.apply();
-
-                hideRevealChips(remoteViews, context, 3);
-
-                for (int h = 3; h <= 5; h++) {
-                    editor.putString("chip_label_" + (h), sharedPreferences.getString("chip_label_" + (h + 1), ""));
-                    editor.putInt("chip_icon_" + (h), sharedPreferences.getInt("chip_icon_" + (h + 1), R.drawable.ic_android_black_24dp));
-                    editor.apply();
-                }
-                updateWidget(context, intent);
-
-                break;
-
-            case ACTION_REMOVE_CHIP_4:
-                editor.putString("chip_label_" + 4, "");
-                editor.putInt("chip_icon_" + 4, R.drawable.ic_android_black_24dp);
-                editor.apply();
-
-                hideRevealChips(remoteViews, context, 4);
-
-                for (int h = 4; h <= 5; h++) {
-                    editor.putString("chip_label_" + (h), sharedPreferences.getString("chip_label_" + (h + 1), ""));
-                    editor.putInt("chip_icon_" + (h), sharedPreferences.getInt("chip_icon_" + (h + 1), R.drawable.ic_android_black_24dp));
-                    editor.apply();
-                }
-
-                updateWidget(context, intent);
-
-                break;
-
-            case ACTION_REMOVE_CHIP_5:
-                editor.putString("chip_label_" + 5, "");
-                editor.putInt("chip_icon_" + 5, R.drawable.ic_android_black_24dp);
-                editor.apply();
-
-                hideRevealChips(remoteViews, context, 5);
-
-                for (int h = 5; h <= 5; h++) {
-                    editor.putString("chip_label_" + (h), sharedPreferences.getString("chip_label_" + (h + 1), ""));
-                    editor.putInt("chip_icon_" + (h), sharedPreferences.getInt("chip_icon_" + (h + 1), R.drawable.ic_android_black_24dp));
-                    editor.apply();
-                }
-
-                updateWidget(context, intent);
-
-                break;
-
-            case ACTION_SETTINGS:
-                Intent settingsIntent = new Intent(android.provider.Settings.ACTION_SETTINGS);
-                settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(settingsIntent);
-                break;
-
-            case ACTION_MAPS:
-
-                openApp(context, "com.google.android.apps.maps");
-
-                break;
-
-
-            case ACTION_MUSIC:
-
-                openApp(context, "com.google.android.music");
-
-                break;
-
-            case ACTION_STORE:
-
-                openApp(context, "com.android.vending");
-
-                break;
-
-            case ACTION_CALC:
-
-
-                for (PackageInfo pi : packs) {
-                    if (pi.packageName.toLowerCase().contains("calcul")) {
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("appName", pi.applicationInfo.loadLabel(pm));
-                        map.put("packageName", pi.packageName);
-                        items.add(map);
-                    }
-                }
-
-                if (items.size() >= 1) {
-                    String packageName = (String) items.get(0).get("packageName");
-                    Intent calcIntent = pm.getLaunchIntentForPackage(packageName);
-                    if (calcIntent != null)
-                        context.startActivity(calcIntent);
-                } else {
-                    Toast.makeText(context, "No Applications Found!", Toast.LENGTH_LONG).show();
-                }
-
-                break;
-
-            case ACTION_GALLERY:
-
-                for (PackageInfo pi : packs) {
-                    if (pi.packageName.toLowerCase().contains("gallery")) {
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("appName", pi.applicationInfo.loadLabel(pm));
-                        map.put("packageName", pi.packageName);
-                        items.add(map);
-                    }
-                }
-
-                if (items.size() >= 1) {
-                    String packageName = (String) items.get(0).get("packageName");
-                    Intent calcIntent = pm.getLaunchIntentForPackage(packageName);
-                    if (calcIntent != null)
-                        context.startActivity(calcIntent);
-                } else {
-                    Toast.makeText(context, "No Applications Found!", Toast.LENGTH_LONG).show();
-                }
-
-                break;
-
-            case ACTION_G_MAIL:
-
-                openApp(context, "com.google.android.gm");
-
+                Intent intent1 = new Intent(context, HomeViewWidgetProvider.class);
+                intent1.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                int ids[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context.getApplicationContext(), HomeViewWidgetProvider.class));
+                intent1.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+                context.sendBroadcast(intent1);
                 break;
         }
 
-    }
-
-    public void hideRevealChips(RemoteViews remoteViews, Context context, int i) {
-
-        remoteViews.setViewVisibility(context.getResources().getIdentifier("reminder_entry_" + i, "id", context.getPackageName()), View.GONE);
     }
 
     public static boolean openApp(Context context, String packageName) {
@@ -359,6 +237,7 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
                 throw new PackageManager.NameNotFoundException();
             }
             i.addCategory(Intent.CATEGORY_LAUNCHER);
+
             context.startActivity(i);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
@@ -366,15 +245,12 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
         }
     }
 
-    public void updateWidget(Context context, Intent intent) {
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            ComponentName thisAppWidget = new ComponentName(context.getPackageName(), HomeViewWidgetProvider.class.getName());
-            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
-
-            onUpdate(context, appWidgetManager, appWidgetIds);
-        }
+    public void updateWidget(Context context) {
+        Intent updateIntent = new Intent(context, HomeViewWidgetProvider.class);
+        updateIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int ids[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context.getApplicationContext(), HomeViewWidgetProvider.class));
+        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        context.sendBroadcast(updateIntent);
     }
 
 }

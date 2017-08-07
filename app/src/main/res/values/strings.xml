@@ -1,33 +1,78 @@
 <resources>
-    <string name="app_name">HomeView</string>
-    <string name="title_activity_home_view">Home View</string>
+    <string name="app_name">Dash Dock</string>
     <string name="search_hint">Search…</string>
     <string name="content_google_g">Google G</string>
     <string name="content_clear_button">Clear</string>
     <string name="placeholder_label">Empty Label</string>
 
-    //Chip Config
-    <string name="chip_label_hint">I want this reminder to be about…</string>
+    //titles
+    <string name="title_dash_dock">Dash Dock</string>
+    <string name="title_app_icons_list">App Shortcuts</string>
+    <string name="title_widget_settings">Widget Settings</string>
+
+    <string name="default_label">Default</string>
+
+    //Reminder Adder
+    <string name="chip_label_hint">Remember to…</string>
     <string name="chip_label_restriction">Using only 24 letters!</string>
-    <string name="chip_icons_grid_header">Which i can remember with a…</string>
+    <string name="chip_icon_heading">Reminder icon</string>
 
-    <string name="temp_name_pass">0</string>
+    //Action bar actions
+    <string name="action_settings">Widget Settings</string>
 
-    <string name="help_text">To use HomeView, Add its widget to the home screen of your favored launcher.</string>
+    <string name="help_text">To use Dash Dock, Add its widget to your home launcher.</string>
     <string name="help_image">Help Image</string>
 
     //Developer Info
     <string name="app_version">Version 1.0</string>
-    <string name="app_full_name">HomeView for Android</string>
+    <string name="app_full_name">Dash Dock for Android</string>
     <string name="dev_name">Arshdeep Singh Saini</string>
     <string name="dev_desc">App creator, Designer and Programmer. </string>
     <string name="gplus_follow">Google+</string>
     <string name="fb_follow">Facebook</string>
     <string name="thanks">Special thanks to all beta testers!</string>
 
+    <string name="label_search">Search</string>
+    <string name="label_app_icon">App icon:</string>
+    <string name="label_app_to_open">App to open:</string>
+    <string name="label_app_name">App Name</string>
+    <string name="label_app_uri">App package</string>
+    <string name="label_current_tz">Current Time Zone</string>
+    <string name="label_change">Change</string>
+    <string name="label_change_shortcuts">Change App Shortcuts</string>
+    <string name="label_change_theme">Change Widget Theme</string>
+    <string name="label_no_alarms">No Upcoming Alarms</string>
+    <string name="label_loading">Loading Installed Apps…</string>
+
+    //theme radio buttons
+    <string name="dark_theme">Dark Theme</string>
+    <string name="light_theme">Light Theme</string>
+
+    //checkboxes
+    <string name="show_clock">Display Dual Clock</string>
+    <string name="show_apps">Display App Shortcuts</string>
+    <string name="show_reminders">Display Quick Glance Reminders</string>
+
+    //buttons
+    <string name="choose_app">Choose app</string>
+    <string name="settings">Widget Settings</string>
+    <string name="developer_info">Developer Info</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="apply">Apply</string>
+    <string name="complete">Complete</string>
+
+    <string name="tz_search_hint">Search time zone…</string>
+
+    <string name="content_app_icon">App Icon</string>
+    <string name="content_reminder">Reminder</string>
+    <string name="content_widget_divider">Divider</string>
+
     <string name="content_dev_logo">Developer Logo</string>
     <string name="content_dev_cover">Developer Cover Photo</string>
     <string name="content_g_plus_logo">Google Plus</string>
     <string name="content_fb_logo">Facebook</string>
     <string name="content_app_logo">App Logo</string>
+    <string name="title_activity_widget_preferences">Settings</string>
+
 </resources>
