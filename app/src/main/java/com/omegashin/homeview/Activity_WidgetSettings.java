@@ -91,6 +91,7 @@ public class Activity_WidgetSettings extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         RadioButton radioButtonDark = dialog.findViewById(R.id.theme_dark);
         RadioButton radioButtonLight = dialog.findViewById(R.id.theme_light);
+        RadioButton radioButtonClear = dialog.findViewById(R.id.theme_clear);
 
         switch (sharedPreferences.getString("theme", "dark")) {
             case "dark":
@@ -98,6 +99,9 @@ public class Activity_WidgetSettings extends AppCompatActivity {
                 break;
             case "light":
                 radioButtonLight.setChecked(true);
+                break;
+            case "clear":
+                radioButtonClear.setChecked(true);
                 break;
         }
 

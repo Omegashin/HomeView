@@ -13,14 +13,23 @@
             android:id="@+id/theme_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="4dp"
             android:checked="true"
             android:text="@string/dark_theme" />
 
         <RadioButton
             android:id="@+id/theme_light"
             android:layout_width="wrap_content"
+            android:padding="4dp"
             android:layout_height="wrap_content"
             android:text="@string/light_theme" />
+
+        <RadioButton
+            android:id="@+id/theme_clear"
+            android:layout_width="wrap_content"
+            android:padding="4dp"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_theme" />
 
     </RadioGroup>
 

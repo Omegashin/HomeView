@@ -14,7 +14,6 @@
         android:id="@+id/box_clock"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:fontFamily="sans-serif-condensed"
         android:text="@string/show_clock" />
 
     <CheckBox
@@ -24,7 +23,6 @@
         android:id="@+id/box_apps"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:fontFamily="sans-serif-condensed"
         android:text="@string/show_apps" />
 
     <CheckBox
@@ -34,7 +32,6 @@
         android:id="@+id/box_reminders"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:fontFamily="sans-serif-condensed"
         android:text="@string/show_reminders" />
 
     <Button

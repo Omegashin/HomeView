@@ -2,6 +2,7 @@ package com.omegashin.homeview;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -9,11 +10,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.AlarmClock;
 import android.support.annotation.RequiresApi;
+import android.support.v7.graphics.Palette;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -26,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class HomeViewWidgetProvider extends AppWidgetProvider {
 
@@ -56,6 +62,8 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
             remoteViews = new RemoteViews(context.getPackageName(), R.layout.hvi_dark);
         } else if (sharedPreferences.getString("theme", "dark").equals("light")) {
             remoteViews = new RemoteViews(context.getPackageName(), R.layout.hvi_light);
+        } else if (sharedPreferences.getString("theme", "dark").equals("clear")) {
+            remoteViews = new RemoteViews(context.getPackageName(), R.layout.hvi_clear);
         }
 
         ComponentName thisWidget = new ComponentName(context, HomeViewWidgetProvider.class);
@@ -75,24 +83,30 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
         } else {
             remoteViews.setTextViewText(R.id.alarm_parent, context.getResources().getString(R.string.label_no_alarms));
         }
+        remoteViews.setTextViewText(R.id.label_home, TimeZone.getDefault().getDisplayName());
 
         //Set Foreign Clock Time
         String foreignTimeZonePref = sharedPreferences.getString("foreignTimeZone", "");
-        remoteViews.setString(R.id.foreign_text_clock, "setTimeZone", foreignTimeZonePref);
+        remoteViews.setTextViewText(R.id.foreign_label,foreignTimeZonePref.substring(foreignTimeZonePref.indexOf("/")+1));
+
+        remoteViews.setString(R.id.clock_foreign_main, "setTimeZone", foreignTimeZonePref);
+        remoteViews.setString(R.id.clock_foreign_meridiem, "setTimeZone", foreignTimeZonePref);
+        remoteViews.setString(R.id.clock_foreign_date, "setTimeZone", foreignTimeZonePref);
 
         //final WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
         //final Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-
+//
         //Palette palette = Palette.generate(((BitmapDrawable) (wallpaperDrawable)).getBitmap());
-
+//
         //Log.e("color: ", String.valueOf(palette.getDarkMutedColor(context.getResources().getColor(R.color.blue_300,context.getTheme()))));
-
+//
         //int darkVibrant = palette.getVibrantColor(context.getResources().getColor(R.color.blue_300,context.getTheme()));
         //int lightVibrant = palette.getDarkMutedColor(context.getResources().getColor(R.color.blue_300,context.getTheme()));
-
-        //remoteViews.setTextColor(R.id.foreign_text_clock,palette.getLightVibrantColor(context.getResources().getColor(R.color.blue_300,context.getTheme())));
-        //remoteViews.setInt(R.id.alarm_parent, "setBackgroundColor", darkVibrant);
-        //remoteViews.setInt(R.id.clock_parent, "setBackgroundColor", darkVibrant);
+        //int col = palette.getVibrantColor(context.getResources().getColor(R.color.blue_300,context.getTheme()));
+//
+//
+        //remoteViews.setInt(R.id.alarm_parent, "setBackgroundColor", lightVibrant);
+        //remoteViews.setInt(R.id.clock_parent, "setBackgroundColor", lightVibrant);
         //remoteViews.setInt(R.id.apps_gridview, "setBackgroundColor", lightVibrant);
         //remoteViews.setInt(R.id.reminders_gridview, "setBackgroundColor", lightVibrant);
         //remoteViews.setInt(R.id.add_reminder, "setBackgroundColor", lightVibrant);
@@ -148,7 +162,7 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.reminders_gridview);
 
             setOnClickIntent(remoteViews, R.id.alarm_parent, ACTION_SHOW_ALARMS);
-            setOnClickIntent(remoteViews, R.id.app_calender, ACTION_CALENDER);
+            setOnClickIntent(remoteViews, R.id.home_clock, ACTION_CALENDER);
             setOnClickIntent(remoteViews, R.id.add_reminder, ACTION_ADD_REMINDER);
 
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);

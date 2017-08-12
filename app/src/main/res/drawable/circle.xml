@@ -8,8 +8,8 @@
     </item>
     <item>
         <shape>
-            <solid android:color="@color/card_view_teal" />
-            <corners android:radius="4dp" />
+            <solid android:color="@color/circle" />
+            <corners android:radius="32dp" />
         </shape>
     </item>
 

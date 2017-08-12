@@ -75,6 +75,7 @@ public class Activity_AddReminder extends AppCompatActivity {
 
                 reminderName.setText(reminders.get(index).getLabel());
                 imageView.setImageResource(getResources().getIdentifier(reminders.get(index).getIconName(), "drawable", getPackageName()));
+                add.setText(getResources().getString(R.string.apply));
 
                 //IconResId=reminders.get(index).getIcon();
                 IconResName = reminders.get(index).getIconName();

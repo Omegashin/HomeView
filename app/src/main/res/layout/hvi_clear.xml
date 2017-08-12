@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/card_view_dark"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="8dp">
@@ -177,7 +176,6 @@
         android:layout_below="@id/clock_parent"
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/card_view_dark"
         android:clipToPadding="false"
         android:columnWidth="56dp"
         android:horizontalSpacing="0dp"
@@ -190,8 +188,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/apps_gridview"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/card_view_dark">
+        android:layout_marginTop="8dp">
 
         <ListView
             android:id="@+id/reminders_gridview"

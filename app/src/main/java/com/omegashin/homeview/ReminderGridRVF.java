@@ -52,7 +52,7 @@ class ReminderGridRVF implements RemoteViewsService.RemoteViewsFactory {
     @Override
     public RemoteViews getViewAt(int position) {
 
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.item_w_reminder_dark);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.item_w_reminder);
 
         if (position != getCount()) {
 

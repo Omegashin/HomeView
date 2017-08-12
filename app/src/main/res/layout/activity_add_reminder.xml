@@ -8,11 +8,10 @@
     <EditText
         android:id="@+id/chip_label"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@color/primary"
         android:fontFamily="sans-serif-condensed"
         android:hint="@string/chip_label_hint"
-        android:maxLength="24"
         android:padding="16dp"
         android:textColor="@color/white"
         android:textColorHint="@color/grey_200"
@@ -80,7 +79,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_margin="4dp"
-            android:text="@string/complete"
+            android:text="@string/remove"
             android:textColor="@color/accent"
             android:visibility="gone" />
 

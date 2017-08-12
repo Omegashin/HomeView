@@ -21,32 +21,138 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <TextClock
-                android:id="@+id/app_calender"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/home_clock"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:fontFamily="sans-serif-condensed"
+                android:layout_weight="1"
                 android:foreground="@drawable/ripple"
-                android:gravity="center"
-                android:textColor="@color/w_accent_dark"
-                android:textSize="40sp"
-                tools:targetApi="jelly_bean_mr1" />
+                android:orientation="vertical">
 
-            <TextClock
-                android:id="@+id/foreign_text_clock"
-                android:hapticFeedbackEnabled="true"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/label_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/label_home"
+                    android:textColor="@color/w_accent_dark"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextClock
+                        android:id="@+id/clock_home_main"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:format12Hour="h:mm"
+                        android:gravity="center"
+                        android:textColor="@color/w_accent_dark"
+                        android:textSize="32sp"
+                        android:typeface="sans"
+                        tools:targetApi="jelly_bean_mr1" />
+
+                    <TextClock
+                        android:id="@+id/clock_home_meridiem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
+                        android:format12Hour="a"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/w_accent_dark"
+                        android:textSize="12sp"
+                        tools:targetApi="jelly_bean_mr1" />
+
+                </LinearLayout>
+
+                <TextClock
+                    android:id="@+id/clock_home_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:format12Hour="EEE, MMM d"
+                    android:gravity="center"
+                    android:textColor="@color/w_accent_dark"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    tools:targetApi="jelly_bean_mr1" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="1.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:alpha="0.2"
+                android:background="@color/white"
+                android:contentDescription="@string/content_widget_divider" />
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:fontFamily="sans-serif-condensed"
-                android:foreground="@drawable/ripple"
-                android:gravity="center"
-                android:textColor="@color/w_accent_dark"
-                android:textSize="40sp"
-                tools:targetApi="jelly_bean_mr1" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/foreign_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/label_foreign_clock"
+                    android:textColor="@color/w_accent_dark"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextClock
+                        android:id="@+id/clock_foreign_main"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:format12Hour="h:mm"
+                        android:gravity="center"
+                        android:textColor="@color/w_accent_dark"
+                        android:textSize="32sp"
+                        android:typeface="sans"
+                        tools:targetApi="jelly_bean_mr1" />
+
+                    <TextClock
+                        android:id="@+id/clock_foreign_meridiem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
+                        android:format12Hour="a"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/w_accent_dark"
+                        android:textSize="12sp"
+                        tools:targetApi="jelly_bean_mr1" />
+
+                </LinearLayout>
+
+                <TextClock
+                    android:id="@+id/clock_foreign_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:format12Hour="EEE, MMM d"
+                    android:gravity="center"
+                    android:textColor="@color/w_accent_dark"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    tools:targetApi="jelly_bean_mr1" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -54,13 +160,13 @@
             android:id="@+id/alarm_parent"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:fontFamily="sans-serif-condensed"
             android:foreground="@drawable/ripple"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="8dp"
             android:text="@string/label_no_alarms"
-            android:textColor="@color/w_accent_dark" />
+            android:textColor="@color/w_accent_dark"
+            android:textSize="13sp" />
 
     </LinearLayout>
 
@@ -82,38 +188,38 @@
     <RelativeLayout
         android:id="@+id/reminders_parent"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/apps_gridview"
         android:layout_marginTop="8dp"
         android:background="@drawable/card_view_light">
 
-        <ImageView
-            android:id="@+id/add_reminder"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:paddingEnd="4dp"
-            android:paddingRight="4dp"
-            android:paddingStart="0dp"
-            android:paddingLeft="0dp"
-            android:layout_alignParentRight="true"
-            android:contentDescription="@string/content_reminder"
-            android:foreground="@drawable/ripple"
-            android:scaleType="center"
-            android:src="@drawable/ic_add_black_24dp"
-            android:tint="@color/w_accent_dark" />
-
-        <GridView
+        <ListView
             android:id="@+id/reminders_gridview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toStartOf="@id/add_reminder"
-            android:layout_toLeftOf="@id/add_reminder"
-            android:horizontalSpacing="0dp"
             android:clipToPadding="false"
-            android:columnWidth="96dp"
-            android:numColumns="auto_fit"
+            android:divider="@null"
+            android:numColumns="1"
+            android:paddingBottom="32dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp"
             android:scrollbars="none" />
+
+        <ImageView
+            android:id="@+id/add_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/reminders_gridview"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:background="@drawable/circle"
+            android:contentDescription="@string/content_reminder"
+            android:padding="8dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_add_black_24dp"
+            android:tint="@color/w_accent_dark" />
 
     </RelativeLayout>
 

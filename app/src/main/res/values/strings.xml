@@ -43,10 +43,13 @@
     <string name="label_change_theme">Change Widget Theme</string>
     <string name="label_no_alarms">No Upcoming Alarms</string>
     <string name="label_loading">Loading Installed Apps…</string>
+    <string name="label_home">Current</string>
+    <string name="label_foreign_clock">Foreign</string>
 
-    //theme radio buttons
+    //radio buttons
     <string name="dark_theme">Dark Theme</string>
     <string name="light_theme">Light Theme</string>
+    <string name="clear_theme">Clear Theme</string>
 
     //checkboxes
     <string name="show_clock">Display Dual Clock</string>
@@ -60,7 +63,7 @@
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
-    <string name="complete">Complete</string>
+    <string name="remove">Remove</string>
 
     <string name="tz_search_hint">Search time zone…</string>
 

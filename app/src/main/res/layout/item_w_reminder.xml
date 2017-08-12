@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reminder_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="32dp"
+    android:padding="4dp">
+
+    <ImageView
+        android:id="@+id/reminder_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="32dp"
+        android:contentDescription="@string/content_reminder"
+        android:scaleType="center"
+        android:src="@drawable/ic_check"
+        android:tint="@color/widgetAccent" />
+
+    <ImageView
+        android:id="@+id/divider"
+        android:layout_width="1.5dp"
+        android:layout_height="match_parent"
+        android:alpha="0.1"
+        android:background="@color/white"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:contentDescription="@string/content_widget_divider" />
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp"
+        android:layout_gravity="center"
+        android:paddingLeft="0dp"
+        android:paddingStart="0dp"
+        android:text="@string/placeholder_label"
+        android:textColor="@color/widgetAccent" />
+
+</LinearLayout>

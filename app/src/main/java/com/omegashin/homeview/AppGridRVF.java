@@ -53,7 +53,7 @@ class AppGridRVF implements RemoteViewsService.RemoteViewsFactory {
     @Override
     public RemoteViews getViewAt(int position) {
 
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.item_w_app_dark);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.item_w_app);
 
         remoteViews.setImageViewResource(R.id.app_icon, context.getResources().getIdentifier(data.get(position).getIconName(), "drawable", context.getPackageName()));
 
