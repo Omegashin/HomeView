@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:icon="@drawable/app_access_time"
+        android:key="pref_timezone"
+        android:summary="Choose second clock's timezone"
+        android:title="Change Timezone" />
+
+    <Preference
+        android:icon="@drawable/app_apps"
+        android:key="pref_shortcuts"
+        android:summary="Customize app shortcuts layout"
+        android:title="Manage App Shortcuts" />
+
+    <Preference
+        android:icon="@drawable/ic_brush_black_24dp"
+        android:key="pref_theme"
+        android:summary="Choose between light, dark and transparent themes"
+        android:title="Change Widget Theme" />
+
+    <Preference
+        android:icon="@drawable/ic_face_black_24dp"
+        android:key="pref_dev"
+        android:title="Developer Info" />
+
+</PreferenceScreen>

@@ -106,19 +106,7 @@ public class Activity_IconReturn extends AppCompatActivity {
 
             progressBar.setVisibility(View.GONE);
 
-            Log.e("homeview", " Before Compare: ");
-
-            for(int i=0;i<4;i++){
-                Log.e("homeview", ResNames.get(i));
-            }
-
             Collections.sort(ResNames, new AlphaCompare());
-
-            Log.e("homeview", " After Compare: ");
-
-            for(int i=0;i<4;i++){
-                Log.e("homeview", ResNames.get(i));
-            }
 
             Adapter_IconReturn adapterAddReminder = new Adapter_IconReturn(getBaseContext(), ResNames);
 

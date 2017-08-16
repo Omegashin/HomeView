@@ -17,8 +17,6 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.AlarmClock;
 import android.support.annotation.RequiresApi;
-import android.support.v7.graphics.Palette;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -62,7 +60,7 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
             remoteViews = new RemoteViews(context.getPackageName(), R.layout.hvi_dark);
         } else if (sharedPreferences.getString("theme", "dark").equals("light")) {
             remoteViews = new RemoteViews(context.getPackageName(), R.layout.hvi_light);
-        } else if (sharedPreferences.getString("theme", "dark").equals("clear")) {
+        } else if (sharedPreferences.getString("theme", "dark").equals("transparent")) {
             remoteViews = new RemoteViews(context.getPackageName(), R.layout.hvi_clear);
         }
 
@@ -76,7 +74,7 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
         if (alarmManager.getNextAlarmClock() != null) {
             long nextAlarmTime = alarmManager.getNextAlarmClock().getTriggerTime();
             Date nextAlarmDate = new Date(nextAlarmTime);
-            SimpleDateFormat fmtOut = new SimpleDateFormat("EEE @ H:mm a", Locale.ENGLISH);
+            SimpleDateFormat fmtOut = new SimpleDateFormat("EEE @ h:mm a", Locale.ENGLISH);
             fmtOut.format(nextAlarmDate);
             //String nextAlarm = Settings.System.getString(context.getContentResolver(), Settings.System.NEXT_ALARM_FORMATTED);
             remoteViews.setTextViewText(R.id.alarm_parent, "Alarm - " + fmtOut.format(nextAlarmDate));

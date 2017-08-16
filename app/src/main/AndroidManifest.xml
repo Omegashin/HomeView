@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:fullBackupContent="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -25,14 +25,6 @@
                 android:resource="@xml/home_view_widget_info" />
         </receiver>
 
-        <activity
-            android:name=".DashDock"
-            android:label="@string/title_dash_dock">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".Activity_Search"
             android:theme="@style/SearchBarTheme"
@@ -56,9 +48,6 @@
             android:name=".Activity_DeveloperInfo"
             android:label="Developer Info" />
         <activity
-            android:name=".Activity_WidgetSettings"
-            android:label="@string/title_widget_settings" />
-        <activity
             android:name=".Activity_PackageList"
             android:label="Installed Apps">
             <meta-data
@@ -81,6 +70,16 @@
         <activity
             android:name=".WidgetStyle"
             android:theme="@style/ReminderDialogTheme" />
+        <activity
+            android:name=".WidgetSettings"
+            android:label="@string/title_activity_widget_settings">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

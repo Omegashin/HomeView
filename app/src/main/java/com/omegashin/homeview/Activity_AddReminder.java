@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -43,13 +44,17 @@ public class Activity_AddReminder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_reminder);
 
+        final AdRequest adRequestInterstitial = new AdRequest.Builder()
+                .addTestDevice("693D54321B7712770CFE1C775CE04195")
+                .build();
+
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.loadAd(adRequestInterstitial);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        interstitialCount = sharedPreferences.getInt("interstitialCount", 0);
+        sharedPreferences.edit().putInt("interstitialCount", sharedPreferences.getInt("interstitialCount", 0)+1).apply();
 
         final Button add = (Button) findViewById(R.id.add);
         final Button cancel = (Button) findViewById(R.id.cancel);
@@ -159,8 +164,24 @@ public class Activity_AddReminder extends AppCompatActivity {
                     updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
                     sendBroadcast(updateIntent);
 
-                    finish();
+                    interstitialCount = sharedPreferences.getInt("interstitialCount", 0);
 
+                    Log.e("addReminder", String.valueOf(interstitialCount));
+
+                    if(interstitialCount>=3){
+
+                        Log.e("addReminder", "load ad"+String.valueOf(interstitialCount));
+
+                        if (mInterstitialAd.isLoaded()) {
+                            mInterstitialAd.show();
+                        } else {
+                            Log.d("TAG", "The interstitial wasn't loaded yet.");
+                        }
+
+                        sharedPreferences.edit().putInt("interstitialCount", 0).apply();
+                    }
+
+                    finish();
                 }
             }
         });

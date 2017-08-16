@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static com.omegashin.homeview.DashDock.applicationInfoList;
+import static com.omegashin.homeview.WidgetSettings.applicationInfoList;
 
 public class Activity_PackageList extends AppCompatActivity {
 
