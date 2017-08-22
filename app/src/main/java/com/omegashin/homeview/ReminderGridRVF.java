@@ -59,12 +59,18 @@ class ReminderGridRVF implements RemoteViewsService.RemoteViewsFactory {
             remoteViews.setImageViewResource(R.id.reminder_icon, context.getResources().getIdentifier(data.get(position).getIconName(), "drawable", context.getPackageName()));
 
             remoteViews.setTextViewText(R.id.label, data.get(position).getLabel());
-
             Bundle extras = new Bundle();
             extras.putInt(HomeViewWidgetProvider.REMINDER_POSITION, position);
             Intent fillInIntent = new Intent();
             fillInIntent.putExtras(extras);
             remoteViews.setOnClickFillInIntent(R.id.reminder_item, fillInIntent);
+
+            Bundle extras2 = new Bundle();
+            extras2.putInt(HomeViewWidgetProvider.REMINDER_POSITION, position);
+            extras2.putString(context.getPackageName()+".type", "delete");
+            Intent fillInIntent2 = new Intent();
+            fillInIntent2.putExtras(extras2);
+            remoteViews.setOnClickFillInIntent(R.id.delete, fillInIntent2);
         }
 
         return (remoteViews);

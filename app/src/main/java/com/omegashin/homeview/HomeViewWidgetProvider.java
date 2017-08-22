@@ -2,7 +2,6 @@ package com.omegashin.homeview;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -10,13 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.AlarmClock;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -186,14 +184,14 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
 
         super.onReceive(context, intent);
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        Gson gson = new Gson();
+
         switch (intent.getAction()) {
+
 
             case ACTION_CLICK_APP:
                 int viewIndex = intent.getIntExtra(APP_POSITION, 0);
-
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-                Gson gson = new Gson();
                 Type type = new TypeToken<List<AppIcon>>() {
                 }.getType();
                 ArrayList<AppIcon> list = gson.fromJson(sharedPreferences.getString("appIconsData", "[]"), type);
@@ -209,11 +207,34 @@ public class HomeViewWidgetProvider extends AppWidgetProvider {
                 break;
 
             case ACTION_CLICK_REMINDER:
-                Intent reminderClickIntent = new Intent(context, Activity_AddReminder.class);
-                reminderClickIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                reminderClickIntent.putExtra("isEdit", true);
-                reminderClickIntent.putExtra("index", intent.getIntExtra(REMINDER_POSITION, 0));
-                context.startActivity(reminderClickIntent);
+                if(intent.getExtras().getString(context.getPackageName()+".type",null)==null) {
+                    Intent reminderClickIntent = new Intent(context, Activity_AddReminder.class);
+                    reminderClickIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                    reminderClickIntent.putExtra("isEdit", true);
+                    reminderClickIntent.putExtra("index", intent.getIntExtra(REMINDER_POSITION, 0));
+                    context.startActivity(reminderClickIntent);
+                }
+                else{
+
+                    ArrayList<Reminder> reminders = new ArrayList<>();
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Type type_reminder = new TypeToken<List<Reminder>>() {
+                    }.getType();
+
+                    if (!(sharedPreferences.getString("remindersData", "")).equals("")) {
+                        reminders = gson.fromJson(sharedPreferences.getString("remindersData", ""), type_reminder);
+                    }
+                    reminders.remove(intent.getExtras().getInt(REMINDER_POSITION,0));
+                    editor.putString("remindersData", gson.toJson(reminders));
+                    editor.apply();
+
+                    Intent updateIntent = new Intent(context, HomeViewWidgetProvider.class);
+                    updateIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                    int ids[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, HomeViewWidgetProvider.class));
+                    updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+                    context.sendBroadcast(updateIntent);
+                }
                 break;
 
 

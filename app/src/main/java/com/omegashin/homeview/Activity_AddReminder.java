@@ -85,7 +85,7 @@ public class Activity_AddReminder extends AppCompatActivity {
                 //IconResId=reminders.get(index).getIcon();
                 IconResName = reminders.get(index).getIconName();
 
-                delete.setVisibility(View.VISIBLE);
+                //delete.setVisibility(View.VISIBLE);
             }
         }
 

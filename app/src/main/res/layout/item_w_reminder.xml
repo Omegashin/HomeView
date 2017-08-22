@@ -1,44 +1,66 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:id="@+id/reminder_item"
-    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="32dp"
-    android:padding="4dp">
+    android:foreground="@drawable/ripple">
 
     <ImageView
-        android:id="@+id/reminder_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="32dp"
+        android:id="@+id/delete"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:alpha="0.6"
         android:contentDescription="@string/content_reminder"
         android:scaleType="center"
         android:src="@drawable/ic_check"
         android:tint="@color/widgetAccent" />
 
-    <ImageView
-        android:id="@+id/divider"
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:alpha="0.2"
-        android:background="@color/white"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:contentDescription="@string/content_widget_divider" />
-
-    <TextView
-        android:id="@+id/label"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_toStartOf="@id/delete"
+        android:layout_toLeftOf="@id/delete"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:paddingRight="8dp"
-        android:paddingEnd="8dp"
-        android:layout_gravity="center"
-        android:paddingLeft="0dp"
-        android:paddingStart="0dp"
-        android:text="@string/placeholder_label"
-        android:textColor="@color/widgetAccent" />
+        android:minHeight="56dp">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/reminder_icon"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/content_reminder"
+            android:scaleType="center"
+            android:src="@drawable/ic_check"
+            android:tint="@color/widgetAccent" />
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:alpha="0.2"
+            android:background="@color/white"
+            android:contentDescription="@string/content_widget_divider" />
+
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:paddingEnd="8dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="8dp"
+            android:paddingStart="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/placeholder_label"
+            android:textColor="@color/widgetAccent" />
+
+    </LinearLayout>
+
+</RelativeLayout>
