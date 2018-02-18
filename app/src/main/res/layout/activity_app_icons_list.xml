@@ -29,6 +29,13 @@
         android:clipToPadding="false"
         android:padding="4dp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="hello"
+        android:gravity="center"
+        android:textSize="24sp"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_app_icon_fab"
         android:layout_width="wrap_content"

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -51,8 +52,12 @@ class ReminderGridRVF implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public RemoteViews getViewAt(int position) {
-
+        if(getCount()==0){
+            Log.e("gridrvf", "empty reminders" );
+        }
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.item_w_reminder);
+
+
 
         if (position != getCount()) {
 

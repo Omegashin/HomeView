@@ -32,6 +32,7 @@
     <string name="fb_follow">Facebook</string>
     <string name="thanks">Special thanks to all beta testers!</string>
 
+    //labels
     <string name="label_search">Search</string>
     <string name="label_app_icon">App icon:</string>
     <string name="label_app_to_open">App to open:</string>
@@ -45,6 +46,7 @@
     <string name="label_loading">Loading Installed Apps…</string>
     <string name="label_home">Current</string>
     <string name="label_foreign_clock">Foreign</string>
+    <string name="label_no_items">No app shortcuts created…</string>
 
     //radio buttons
     <string name="dark_theme">Dark Theme</string>

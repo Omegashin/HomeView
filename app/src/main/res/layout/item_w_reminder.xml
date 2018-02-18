@@ -6,15 +6,15 @@
 
     <ImageView
         android:id="@+id/delete"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:alpha="0.6"
         android:contentDescription="@string/content_reminder"
         android:scaleType="center"
-        android:src="@drawable/ic_check"
+        android:padding="4dp"
+        android:src="@drawable/ic_done"
         android:tint="@color/widgetAccent" />
 
     <LinearLayout
@@ -22,17 +22,17 @@
         android:layout_toStartOf="@id/delete"
         android:layout_toLeftOf="@id/delete"
         android:layout_height="wrap_content"
-        android:minHeight="56dp">
+        android:minHeight="48dp">
 
         <ImageView
             android:id="@+id/reminder_icon"
-            android:layout_width="56dp"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:minHeight="56dp"
+            android:minHeight="48dp"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/content_reminder"
             android:scaleType="center"
-            android:src="@drawable/ic_check"
+            android:src="@drawable/app_android"
             android:tint="@color/widgetAccent" />
 
         <ImageView
@@ -52,12 +52,8 @@
             android:layout_gravity="center"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:paddingEnd="8dp"
-            android:paddingLeft="0dp"
-            android:paddingRight="8dp"
-            android:paddingStart="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/placeholder_label"
             android:textColor="@color/widgetAccent" />
 
