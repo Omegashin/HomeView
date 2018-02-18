@@ -12,7 +12,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,13 +27,15 @@ public class Activity_AppIconsList extends AppCompatActivity {
 
     public static final int ADD_APP_ICON_REQUEST = 1;
     Adapter_AppIcons adapterAppIcons;
-
+    TextView noItemsLabel;
     ArrayList<AppIcon> appIcons = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_icons_list);
+
+        noItemsLabel = findViewById(R.id.noItemsLabel);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,10 +63,12 @@ public class Activity_AppIconsList extends AppCompatActivity {
             appIcons = gson.fromJson(sharedPreferences.getString("appIconsData", ""), type);
         }
 
-        AutoFitRecyclerView recyclerView = (AutoFitRecyclerView) findViewById(R.id.recyclerView);
+        AutoFitRecyclerView recyclerView = findViewById(R.id.recyclerView);
         adapterAppIcons = new Adapter_AppIcons(getBaseContext(), appIcons);
         //recyclerView.setLayoutManager(new GridLayoutManager(this,0));
         recyclerView.setAdapter(adapterAppIcons);
+
+        updateNoItemsLabel();
 
         ItemTouchHelper.Callback callback =
                 new ItemTouchHelperCallback(adapterAppIcons);
@@ -126,7 +132,18 @@ public class Activity_AppIconsList extends AppCompatActivity {
 
                 appIcons.add(appIcon);
                 adapterAppIcons.notifyDataSetChanged();
+                updateNoItemsLabel();
             }
         }
     }
+
+    private void updateNoItemsLabel(){
+        if (appIcons.isEmpty()){
+            noItemsLabel.setVisibility(View.VISIBLE);
+        }
+        else{
+            noItemsLabel.setVisibility(View.GONE);
+        }
+    }
+
 }
